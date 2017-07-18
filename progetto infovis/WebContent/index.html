@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>VivaGraphs WebGL Mouse Input test page</title>
+  <script src="./vivaGraph/dist/vivagraph.js"></script>
+  <script src="graphCreator.js"></script>
+  <script src="index.js"></script>
+  
+  <style type='text/css'>
+    body,
+    #graph-container {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      overflow: hidden;
+      margin: 0px;
+    }
+    .graph-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+    .graph-selection-indicator {
+      position: absolute;
+      background: transparent;
+      border: 1px solid orange;
+    }
+
+  </style>
+</head>
+<h1>Infovis Project</h1>
+<body onload="onLoad()" style="background-color: black;">
+ 
+
+  <div class= "graph-container" id="page-wrapper" style="color: white;">
+
+    <div>
+      Carica il file di testo degli utenti: 
+      <input type="file" id="fileInput">
+    </div>
+
+  </div>
+
+<div id="graph-container"></div>
+  <div class="graph-overlay"></div>
+ 
+  
+
+
+  <span style="color: white; margin: 10px;">Use Shift + Mouse to draw rectangle and select nodes<br></span>
+  <span style="color: white; margin: 10px;text-align: right;">Nodi Selezionati:<br></span>
+  <span style="color: white; margin: 10px; text-align: center" id="elem"><br></span>>
+  <script src="index.js"></script>
+</body>
+
+</html>
