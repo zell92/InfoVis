@@ -10,6 +10,7 @@
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
 <script src="./js/getFiles.js"></script>
 <script src="./js/graphCreator.js"></script>
+
 <style type='text/css'>
 #graph-container {
 	height: 100%;
@@ -50,12 +51,10 @@
 
 
 
-	<div class="col-lg-12" id="input">
-		<div class="page-header" id="input">
-			<h4>Input file:</h4>
-			Load the users text file: <input type="file" id="fileInput">
-			<br> <br> <a class="btn btn-primary" onclick="getFile()"
-				role="button">Send files</a>
+	<div class="col-lg-12" id="input" style="word-wrap:break-word;">
+		<div class="page-header" >
+			<h4>Selected nodes:</h4>
+			<span id="nodes"></span>
 		</div>
 
 	</div>
@@ -67,7 +66,7 @@
 
 		<span>Use mouse wheelUse to zoom in or out the graph  <a
 			style="float: right; visibility: hidden" id="sendCluster"
-			class="btn btn-primary" onclick="sendNodes()" role="button">Send cluster</a>
+			class="btn btn-primary" onclick="" role="button">Send cluster</a>
 			<br> Shift + Mouse to draw rectangle and select nodes n 
 		</span>
 
@@ -81,6 +80,7 @@
 
 
 		<script src="./js/index.js"></script>
+		<script src="./js/secondGraph.js"></script>
 	</div>
 
 </body>

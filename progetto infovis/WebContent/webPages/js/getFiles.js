@@ -1,7 +1,5 @@
 function getFile(){
-
 	var fileInput = document.getElementById('fileInput');
-
 	if(fileInput.files.length != 0 ){
 		localStorage.setItem("nodes",fileInput);
 		//window.location.href="./graph1.html";

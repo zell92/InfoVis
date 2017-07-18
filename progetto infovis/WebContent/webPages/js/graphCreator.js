@@ -1,9 +1,10 @@
 function createGraph(graph){
 	var fileInput = document.getElementById('fileInput');
+	
 	fileInput.addEventListener('change', function(e) {
 		var file = fileInput.files[0];
 		var textType = /text.*/;
-
+		graph.clear();
 		if (file.type.match(textType)) {
 			var reader = new FileReader();
 
@@ -12,7 +13,7 @@ function createGraph(graph){
 				var text = reader.result;
 
 				var lines = text.split(/[\r\n]+/g); // tolerate both Windows and Unix linebreaks
-
+				
 				for(var i = 0; i < lines.length; i++) {
 					graph.addNode(lines[i]);
 				}
@@ -42,3 +43,4 @@ function createGraph(graph){
 	 */
 
 }
+
