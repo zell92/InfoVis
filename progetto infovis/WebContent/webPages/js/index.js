@@ -3,7 +3,7 @@
  * renderer
  */
 var selectedNodes;
-
+var similar;
 function onLoad() {
 
 	var graph = Viva.Graph.graph();
@@ -15,8 +15,7 @@ function onLoad() {
 
 	createGraph(graph);
 
-
-
+	similar = createArraySimilar();
 
 
 	var layout = Viva.Graph.Layout.forceDirected(graph, {
@@ -36,9 +35,15 @@ function onLoad() {
 	});
 	var multiSelectOverlay;
 
-	renderer.run();
+//disegna il grafo e crea la matrice dei simili solo dopo aver inviato i file
+	
+	var sendButton = document.getElementById("button");
 
-
+	sendButton.onclick = function() {
+		//alert(similar.length);
+		getFile();
+		renderer.run();
+	}
 
 	document.addEventListener('keydown', function(e) {
 		if (e.which === 16 && !multiSelectOverlay) { // shift key
@@ -52,6 +57,7 @@ function onLoad() {
 		}
 	});
 }
+
 
 function startMultiSelect(graph, renderer, layout) {
 	var graphics = renderer.getGraphics();
@@ -91,7 +97,6 @@ function startMultiSelect(graph, renderer, layout) {
 
 		function higlightIfInside(node) {
 			var nodeUI = graphics.getNodeUI(node.id);
-			//var nodesInside =[];
 			if (isInside(node.id, topLeft, bottomRight)) {
 				nodeUI.color = 0xFFA500ff;
 				nodeUI.size = 20;
@@ -122,7 +127,8 @@ function startMultiSelect(graph, renderer, layout) {
 }
 
 function sendNodes(){
-	localStorage.setItem("nodesInside",selectedNodes);
+	localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
+	localStorage.setItem("nodesSimilar",JSON.stringify(similar));
 	window.location.href = "./secondGraph.html";
 }
 

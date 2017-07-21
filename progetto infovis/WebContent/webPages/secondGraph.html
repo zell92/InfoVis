@@ -7,11 +7,16 @@
 <title>Infovis Project</title>
 
 <link rel="stylesheet" type="text/css" href="css/local.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap-slider.css" />
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
-<script src="./js/getFiles.js"></script>
-<script src="./js/graphCreator.js"></script>
+
+
 
 <style type='text/css'>
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
 #graph-container {
 	height: 100%;
 	width: 100%;
@@ -51,23 +56,23 @@
 
 
 
-	<div class="col-lg-12" id="input" style="word-wrap:break-word;">
-		<div class="page-header" >
-			<h4>Selected nodes:</h4>
-			<span id="nodes"></span>
-		</div>
 
-	</div>
 
-	<div id="grafo" style="visibility: hidden">
+	<div id="grafo">
 
 
 
 
-		<span>Use mouse wheelUse to zoom in or out the graph  <a
-			style="float: right; visibility: hidden" id="sendCluster"
-			class="btn btn-primary" onclick="" role="button">Send cluster</a>
-			<br> Shift + Mouse to draw rectangle and select nodes n 
+		<span>- Use mouse wheelUse to zoom in or out the graph 
+		<br><br>
+		- Use the bar below to set the threshold of similar nodes
+		<br>
+		<input  id="barra" data-slider-id='ex1Slider' type="text" data-slider-min="1"
+			data-slider-max="400" data-slider-step="1" data-slider-value="5" /> 
+			<br><br>
+			<font color="orange">&#x25A0;</font> - Nodes selected in the cluster
+			<br> 
+			<font color="0x009ee8ff">&#x25A0;</font> - Nodes not selected in the cluster, but similar
 		</span>
 
 
@@ -79,8 +84,9 @@
 
 
 
-		<script src="./js/index.js"></script>
+		<script src="./js/bootstrap-slider.js"></script>
 		<script src="./js/secondGraph.js"></script>
+
 	</div>
 
 </body>

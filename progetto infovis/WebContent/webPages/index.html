@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/local.css" />
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
+<script src="./js/mapSimilarCreator.js"></script>
 <script src="./js/getFiles.js"></script>
 <script src="./js/graphCreator.js"></script>
 <style type='text/css'>
@@ -53,9 +54,10 @@
 	<div class="col-lg-12" id="input">
 		<div class="page-header" id="input">
 			<h4>Input file:</h4>
-			Load the users text file: <input type="file" id="fileInput">
-			<br> <br> <a class="btn btn-primary" onclick="getFile()"
-				role="button">Send files</a>
+			Load the follower text file: <input type="file" id="follower">
+			<br>Load the similar text file: <input type="file" id="similar">
+			<br> <br> <a class="btn btn-primary" id="button" 
+				role="button">Send files</a> 
 		</div>
 
 	</div>
