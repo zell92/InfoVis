@@ -6,15 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Infovis Project</title>
 
-<link rel="stylesheet" type="text/css" href="css/local.css" />
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
 <script src="./js/mapSimilarCreator.js"></script>
 <script src="./js/getFiles.js"></script>
 <script src="./js/graphCreator.js"></script>
 <style type='text/css'>
-#graph-container {
-	height: 99%;
-	width: 99%;
+
+body,#graph-container {
+font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
+		sans-serif;
+	font-size: 14px;
+	height: 100%;
+	width: 100%;
 	position: absolute;
 	overflow: hidden;
 	margin: 0px;
@@ -34,7 +37,9 @@
 	background: transparent;
 	border: 1px solid orange;
 }
+
 </style>
+<link rel="stylesheet" type="text/css" href="css/local.css" />
 
 </head>
 <body onload="onLoad()">
