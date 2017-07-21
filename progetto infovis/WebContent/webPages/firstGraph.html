@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infovis Project</title>
+
+<link rel="stylesheet" type="text/css" href="css/local.css" />
+<script src="./js/vivaGraph/dist/vivagraph.js"></script>
+<script src="./js/mapSimilarCreator.js"></script>
+<script src="./js/getFiles.js"></script>
+<script src="./js/graphCreator.js"></script>
+<style type='text/css'>
+#graph-container {
+	height: 99%;
+	width: 99%;
+	position: absolute;
+	overflow: hidden;
+	margin: 0px;
+}
+
+.graph-overlay {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.graph-selection-indicator {
+	position: absolute;
+	background: transparent;
+	border: 1px solid orange;
+}
+</style>
+
+</head>
+<body onload="onLoad()">
+
+
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+
+			<a class="navbar-brand" href="./index.html">InfoVis Project</a>
+		</div>
+	</nav>
+
+
+
+
+	<div class="col-lg-12" id="input">
+		<div class="page-header" id="input">
+			<h4>Input file:</h4>
+			Load the follower text file: <input type="file" id="follower">
+			<br>Load the similar text file: <input type="file" id="similar">
+			<br> <br> <a class="btn btn-primary" id="button" 
+				role="button">Send files</a> 
+		</div>
+
+	</div>
+
+	<div id="grafo" style="visibility: hidden">
+
+
+
+
+		<span>Use mouse wheelUse to zoom in or out the graph  <a
+			style="float: right; visibility: hidden" id="sendCluster"
+			class="btn btn-primary" onclick="sendNodes()" role="button">Send cluster</a>
+			<br> Shift + Mouse to draw rectangle and select nodes n 
+		</span>
+
+
+
+
+		<div id="graph-container"></div>
+		<div class="graph-overlay"></div>
+
+
+
+
+		<script src="./js/index.js"></script>
+	</div>
+
+</body>
+</html>

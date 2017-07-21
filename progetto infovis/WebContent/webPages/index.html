@@ -7,34 +7,7 @@
 <title>Infovis Project</title>
 
 <link rel="stylesheet" type="text/css" href="css/local.css" />
-<script src="./js/vivaGraph/dist/vivagraph.js"></script>
-<script src="./js/mapSimilarCreator.js"></script>
-<script src="./js/getFiles.js"></script>
-<script src="./js/graphCreator.js"></script>
-<style type='text/css'>
-#graph-container {
-	height: 99%;
-	width: 99%;
-	position: absolute;
-	overflow: hidden;
-	margin: 0px;
-}
 
-.graph-overlay {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	display: none;
-}
-
-.graph-selection-indicator {
-	position: absolute;
-	background: transparent;
-	border: 1px solid orange;
-}
-</style>
 
 </head>
 <body onload="onLoad()">
@@ -48,42 +21,31 @@
 		</div>
 	</nav>
 
-
-
-
-	<div class="col-lg-12" id="input">
-		<div class="page-header" id="input">
-			<h4>Input file:</h4>
-			Load the follower text file: <input type="file" id="follower">
-			<br>Load the similar text file: <input type="file" id="similar">
-			<br> <br> <a class="btn btn-primary" id="button" 
-				role="button">Send files</a> 
+	<div class="jumbotron">
+		<div class="page-header">
+			<h1 id="navbar">
+				Infovis Group Analyst <IMG SRC="./twitter.png" WIDTH=64 HEIGHT=64>
+			</h1>
 		</div>
 
+
+
+		<p>Through this application you can check if a set of twitter
+			users is part of a community, that is a set of similar users.
+		</p>
+		<p>Is given an initial graph representing a set of users (nodes)
+			and the way they follow each other (links).</p>
+		<p>
+		<p>In this graph, the user must select a cluster of nodes. This
+			cluster will be analyzed and the user can make a visual check if it
+			belongs to a community or not.</p>
+		<a class="btn btn-primary btn-lg" href="./firstGraph.html">Starts
+			using the app</a>
+		</p>
+
 	</div>
 
-	<div id="grafo" style="visibility: hidden">
 
-
-
-
-		<span>Use mouse wheelUse to zoom in or out the graph  <a
-			style="float: right; visibility: hidden" id="sendCluster"
-			class="btn btn-primary" onclick="sendNodes()" role="button">Send cluster</a>
-			<br> Shift + Mouse to draw rectangle and select nodes n 
-		</span>
-
-
-
-
-		<div id="graph-container"></div>
-		<div class="graph-overlay"></div>
-
-
-
-
-		<script src="./js/index.js"></script>
-	</div>
 
 </body>
 </html>
