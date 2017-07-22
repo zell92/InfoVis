@@ -45,10 +45,10 @@
   position: relative;
 }
 .slider.slider-horizontal {
-  width: 96%;
+  width: 94%;
   height: 20px;
-  margin-right: 2%;
-  margin-left: 2%;
+  margin-right: 3%;
+  margin-left: 3%;
 }
 .slider.slider-horizontal .slider-track {
   height: 10px;

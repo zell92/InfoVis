@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Infovis Project</title>
+<link rel="icon" type="img/ico" href="./favicon.ico">
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap-slider.css" />
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
@@ -17,11 +18,13 @@
 }
 
 body,#graph-container {
-	height: 99%;
-	width: 99%;
+	height: 100%;
+	width: 98%;
+	margin-left:1%;
+	margin-right:1%;
 	position: absolute;
 	overflow: hidden;
-	margin: 0px;
+	
 }
 
 .graph-overlay {
@@ -70,9 +73,9 @@ body,#graph-container {
 		<input  id="barra" data-slider-id='ex1Slider' type="text" data-slider-min="1"
 			data-slider-max="400" data-slider-step="1" data-slider-value="5" /> 
 			<br><br>
-			<font color="orange">&#x25A0;</font> - Nodes selected in the cluster
-			<br> 
-			<font color="0x009ee8ff">&#x25A0;</font> - Nodes not selected in the cluster, but similar
+			<font color="orange" size="6px">&#x25A0;</font> - Nodes selected in the cluster
+
+			<font color="0x009ee8ff" size="6px">&#x25A0;</font> - Nodes not selected in the cluster, but similar
 		</span>
 
 

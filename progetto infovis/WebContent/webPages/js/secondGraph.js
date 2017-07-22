@@ -119,7 +119,7 @@ function getKSimilar(k,graphArray){
 		//item = arrey dei simili
 		//key è la chiave
 		if(selectedNodes.indexOf(key)>=0){
-			console.log("chiave valida:"+key);
+			//console.log("chiave valida:"+key);
 
 			//CALCOLO LA LUNGHEZZA DELL'ITERAZIONE SUI SIMILI
 			var iter = k;
@@ -128,11 +128,13 @@ function getKSimilar(k,graphArray){
 
 			//ITERO SUI SIMILI
 			for (var i = 0; i<iter; i++){
+				console.log(key);
+				console.log(item);
 				var array=mapObj.get(item[i]);
 				if(array.indexOf(key)>=0 &&array.indexOf(key)<k){
 					//salvo la coppia di nodi
 					var elem = [key,item[i]];
-					console.log(elem);
+					//console.log(elem);
 					graphArray.push(elem);
 				}
 			}

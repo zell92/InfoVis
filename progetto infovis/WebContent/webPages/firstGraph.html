@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Infovis Project</title>
+<link rel="icon" type="img/ico" href="./favicon.ico">
 
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
 <script src="./js/mapSimilarCreator.js"></script>
@@ -17,10 +18,12 @@ font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
 		sans-serif;
 	font-size: 14px;
 	height: 100%;
-	width: 100%;
+	width: 98%;
+	margin-left:1%;
+	margin-right:1%;
 	position: absolute;
 	overflow: hidden;
-	margin: 0px;
+	cursor:default;
 }
 
 .graph-overlay {
@@ -46,7 +49,7 @@ font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
 
 
 
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navTop">
 		<div class="navbar-header">
 
 			<a class="navbar-brand" href="./index.html">InfoVis Project</a>
@@ -72,7 +75,7 @@ font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
 
 
 
-		<span>Use mouse wheelUse to zoom in or out the graph  <a
+		<span id="span">Use mouse wheelUse to zoom in or out the graph  <a
 			style="float: right; visibility: hidden" id="sendCluster"
 			class="btn btn-primary" onclick="sendNodes()" role="button">Send cluster</a>
 			<br> Shift + Mouse to draw rectangle and select nodes n 

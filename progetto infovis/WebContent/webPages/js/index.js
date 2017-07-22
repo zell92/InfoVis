@@ -4,6 +4,16 @@
  */
 var selectedNodes;
 var similar;
+
+//OFFSET PER LA PARTE SUPERIORE
+var offset=70;
+//OFFSET PER LA PARTE LATERALE
+var body= document.getElementsByTagName("BODY")[0];
+var style = window.getComputedStyle(body);
+var marginLeft = parseFloat(style.getPropertyValue('margin-left'));
+var offsetSide=marginLeft;
+
+
 function onLoad() {
 
 	var graph = Viva.Graph.graph();
@@ -71,14 +81,15 @@ function startMultiSelect(graph, renderer, layout) {
 		// For the sake of this demo we are using silly O(n) implementation.
 		// Could be improved with spatial indexing if required.
 		var graphTop = document.getElementById('graph-container').offsetTop;
+
+
 		var topLeft = graphics.transformClientToGraphCoordinates({
-			x: area.x,
-			y: area.y -graphTop
+			x: area.x - (offsetSide*2),
+			y: area.y - offset - graphTop
 		});
-		console.log(graphTop);
 		var bottomRight = graphics.transformClientToGraphCoordinates({
-			x: area.x + area.width,
-			y: area.y + area.height-graphTop
+			x: area.x + area.width -(offsetSide*2),
+			y: area.y + area.height - offset - graphTop
 		});
 
 		//NODI SELEZIONATI
@@ -197,8 +208,10 @@ function createOverlay(overlayDom) {
 	}
 
 	function updateSelectedAreaIndicator() {
-		selectionIndicator.style.left = selectedArea.x + 'px';
-		selectionIndicator.style.top = selectedArea.y + 'px';
+		
+
+		selectionIndicator.style.left = selectedArea.x - offsetSide + 'px';
+		selectionIndicator.style.top = selectedArea.y-offset + 'px';
 		selectionIndicator.style.width = selectedArea.width + 'px';
 		selectionIndicator.style.height = selectedArea.height + 'px';
 	}
