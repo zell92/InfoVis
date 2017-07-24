@@ -32,9 +32,9 @@ function onLoad() {
 		springLength : 10,
 		springCoeff : 0.0005,
 		dragCoeff : 0.05,
-		gravity : -5,
-		timeStep : 20,
-	        stableThreshold: 0.001
+		gravity : -1.2,
+		timeStep : 10,
+	        stableThreshold: 0.01
 	});
 	
 
