@@ -34,7 +34,12 @@ function onLoad() {
 		dragCoeff : 0.02,
 		gravity : -1.2
 	});
+	
 
+
+for (var i = 0; i < 3000; ++i) {
+  layout.step();
+}
 
 	var graphics = Viva.Graph.View.webglGraphics();
 
