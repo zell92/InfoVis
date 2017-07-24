@@ -31,15 +31,15 @@ function onLoad() {
 	var layout = Viva.Graph.Layout.forceDirected(graph, {
 		springLength : 10,
 		springCoeff : 0.0005,
-		dragCoeff : 0.02,
-		gravity : -1.2
+		dragCoeff : 0.05,
+		gravity : -5,
+		timeStep : 20,
+	        stableThreshold: 0.001
 	});
 	
 
 
-for (var i = 0; i < 3000; ++i) {
-  layout.step();
-}
+	
 
 	var graphics = Viva.Graph.View.webglGraphics();
 
@@ -49,7 +49,7 @@ for (var i = 0; i < 3000; ++i) {
 		container: document.getElementById('graph-container')
 	});
 	var multiSelectOverlay;
-
+	
 //disegna il grafo e crea la matrice dei simili solo dopo aver inviato i file
 	
 	var sendButton = document.getElementById("button");
