@@ -1,21 +1,4 @@
-a b c d e f
-b c p e g n
-c a b f r t
-d c e f u v
-e f d a b c
-f d e g h t
-g f r i o l
-h f t m n z
-i g r s t v
-l m r q r s
-m p o q l a
-n p b c l r
-o n m a s q
-p n r t c m
-q m t v q l
-r l g h m n a
-s q u v z b
-t r z a h f
-u s l m n o
-v s p q a b
-z s p q v c
+a b d
+b a d
+c a b d
+d b c

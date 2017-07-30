@@ -8,7 +8,11 @@ var mapSimilar= new Map();
 //ARRAY DELLE COPPIE DA INSERIRE NEL SECONDO GRAFO
 var graphArray=[];
 
-
+// variabile per l'evento click
+var bool = 0;
+var oldNode = -1;
+var blueColor = "#009ee8ff";
+var orangeColor = "#FFA500ff";
 
 //Instantiate a slider
 var slider = new Slider('#barra', {
@@ -39,20 +43,87 @@ function onLoad(){
 		graph.addLink(entry[0],entry[1]);
 	});
 	
-	var layout= Viva.Graph.Layout.forceDirected(graph, {
-		springLength : 10,
-		springCoeff : 0.0005,
-		dragCoeff : 0.02,
-		gravity : -1.2
+	var layout = Viva.Graph.Layout.forceDirected(graph, {
+		springLength : 100,
+		springCoeff : 0.0001,
+		dragCoeff : 0.05,
+		gravity : -1.2,
+		timeStep : 10,
+	    stableThreshold: 0.1
 	});
 
 	var graphics = Viva.Graph.View.webglGraphics();
 
 
+	// event interaction : add children node.
+	var events = Viva.Graph.webglInputEvents(graphics, graph);
 
+	// change size
+	events.click( function (node){
+		var userid = document.getElementById('userID');
+		if (bool==0){
+			// node
+			var nodeUI = graphics.getNodeUI(node.id);
+			nodeUI.size = 20;
+			userid.innerHTML = "User ID: "+node.id;
+			if(nodeUI.color == 0xFFA500ff){
+				userid.style.color = orangeColor;
+			}
+			else{
+				userid.style.color = blueColor;
+			}
+			userid.style.visibility = 'visible';
+			bool = 1;
+			oldNode = node.id;
 
+			// link
+			graph.forEachLinkedNode(node.id, function(node, link){
+		        var linkUI = graphics.getLinkUI(link.id);
+		        linkUI.color = nodeUI.color;
+		    });
+		}else if(node.id !== oldNode){
+			// node
+			var oldNodeUI = graphics.getNodeUI(oldNode);
+			var nodeUI = graphics.getNodeUI(node.id);
+			oldNodeUI.size = 10;
+			nodeUI.size = 20;
+			userid.innerHTML = "User ID: "+node.id;
+			if(nodeUI.color == 0xFFA500ff){
+				userid.style.color = orangeColor;
+			}
+			else{
+				userid.style.color = blueColor;
+			}
+			userid.style.visibility = 'visible';
 
+			// link
+			graph.forEachLinkedNode(oldNode, function(node, link){
+		        var linkUI = graphics.getLinkUI(link.id);
+		        linkUI.color = 3014898687;
+		    });
+		    graph.forEachLinkedNode(node.id, function(node, link){
+		        var linkUI = graphics.getLinkUI(link.id);
+		        linkUI.color = nodeUI.color;
+		    });
 
+		    oldNode = node.id;
+		}
+		else{
+			// node
+			var nodeUI = graphics.getNodeUI(node.id);
+			nodeUI.size = 10;
+			userid.style.visibility = 'hidden';
+			bool = 0;
+			oldNode = -1;
+
+			// link
+			graph.forEachLinkedNode(node.id, function(node, link){
+		        var linkUI = graphics.getLinkUI(link.id);
+		        linkUI.color = 3014898687;
+		    });
+		}
+	});
+	
 
 	var renderer = Viva.Graph.View.renderer(graph, {
 		layout: layout,
@@ -140,5 +211,11 @@ function getKSimilar(k,graphArray){
 			}
 		}
 	});  
+}
+
+// FUNZIONE PER VISUALIZZARE LE CLIQUES DEI NODI SELEZIONATI PER LA SIMILARITÀ
+function sendSelectedNodes(){
+	//localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
+	window.location.href = "./thirdGraph.html";
 }
 

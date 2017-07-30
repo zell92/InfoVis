@@ -3,20 +3,15 @@
  * renderer
  */
 var selectedNodes;
-var similar;
+//var similar;
+//var similar = JSON.parse(localStorage.getItem("nodesSimilar"));
 
-//OFFSET PER LA PARTE SUPERIORE
-var offset=70;
-//OFFSET PER LA PARTE LATERALE
-var body= document.getElementsByTagName("BODY")[0];
-var style = window.getComputedStyle(body);
-var marginLeft = parseFloat(style.getPropertyValue('margin-left'));
-var offsetSide=marginLeft;
+//ARRAY DEI NODI SELEZIONATI PER LA SIMILARITÀ
+var selectedNodesSimilar = JSON.parse(localStorage.getItem("nodesInside"));
 
 // variabile per l'evento click
 var bool = 0;
 var oldNode = -1;
-
 
 function onLoad() {
 
@@ -27,9 +22,9 @@ function onLoad() {
 
 	graph.clear();
 
-	createGraph(graph);
-	
-	similar = createArraySimilar();
+	createGraphCliques(graph, selectedNodesSimilar);
+
+	//similar = createArraySimilar();
 
 
 	var layout = Viva.Graph.Layout.forceDirected(graph, {
@@ -40,7 +35,7 @@ function onLoad() {
 		timeStep : 10,
 	    stableThreshold: 0.1
 	});
-	
+
 
 	var graphics = Viva.Graph.View.webglGraphics();
 
@@ -112,16 +107,7 @@ function onLoad() {
 	});
 	var multiSelectOverlay;
 	
-	
-//disegna il grafo e crea la matrice dei simili solo dopo aver inviato i file
-	
-	var sendButton = document.getElementById("button");
-
-	sendButton.onclick = function() {
-		//alert(similar.length);
-		getFile();
-		renderer.run();
-	}
+	renderer.run();
 
 	document.addEventListener('keydown', function(e) {
 		if (e.which === 16 && !multiSelectOverlay) { // shift key
@@ -185,7 +171,7 @@ function startMultiSelect(graph, renderer, layout) {
 				nodeUI.color = 0x009ee8ff;
 				nodeUI.size = 10;
 			}
-			var button = document.getElementById('sendCluster');
+			var button = document.getElementById('sendNewCluster');
 			if (nodesInside.length==0){
 
 				button.style.visibility = 'hidden';
@@ -207,7 +193,7 @@ function startMultiSelect(graph, renderer, layout) {
 
 function sendNodes(){
 	localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
-	localStorage.setItem("nodesSimilar",JSON.stringify(similar));
+	//localStorage.setItem("nodesSimilar",JSON.stringify(similar));
 	window.location.href = "./secondGraph.html";
 }
 

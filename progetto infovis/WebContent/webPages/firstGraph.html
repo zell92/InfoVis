@@ -64,6 +64,8 @@ font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
 			<h4>Input file:</h4>
 			Load the follower text file: <input type="file" id="follower">
 			<br>Load the similar text file: <input type="file" id="similar">
+			<br>Load the users2cliques text file: <input type="file" id="users2cliques">
+			<br>Load the cliques2users text file: <input type="file" id="cliques2users">
 			<br> <br> <a class="btn btn-primary" id="button" 
 				role="button">Send files</a> 
 		</div>
@@ -78,7 +80,8 @@ font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
 		<span id="span">Use mouse wheelUse to zoom in or out the graph  <a
 			style="float: right; visibility: hidden" id="sendCluster"
 			class="btn btn-primary" onclick="sendNodes()" role="button">Send cluster</a>
-			<br> Shift + Mouse to draw rectangle and select nodes n 
+			<br> Shift + Mouse to draw rectangle and select nodes n
+			<br><br><a style="float: left; visibility: hidden" id="userID"></a>
 		</span>
 
 

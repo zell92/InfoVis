@@ -7,24 +7,25 @@
 <title>Infovis Project</title>
 <link rel="icon" type="img/ico" href="./favicon.ico">
 
-<link rel="stylesheet" type="text/css" href="css/bootstrap-slider.css" />
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
-
-
+<script src="./js/mapSimilarCreator.js"></script>
+<script src="./js/getFiles.js"></script>
+<script src="./js/graphCreator.js"></script>
+<script src="./js/graphCreatorCliques.js"></script>
 
 <style type='text/css'>
-#ex1Slider .slider-selection {
-	background: #BABABA;
-}
 
 body,#graph-container {
+font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
+		sans-serif;
+	font-size: 14px;
 	height: 100%;
 	width: 98%;
 	margin-left:1%;
 	margin-right:1%;
 	position: absolute;
 	overflow: hidden;
-	
+	cursor:default;
 }
 
 .graph-overlay {
@@ -41,6 +42,7 @@ body,#graph-container {
 	background: transparent;
 	border: 1px solid orange;
 }
+
 </style>
 <link rel="stylesheet" type="text/css" href="css/local.css" />
 
@@ -49,7 +51,7 @@ body,#graph-container {
 
 
 
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navTop">
 		<div class="navbar-header">
 
 			<a class="navbar-brand" href="./index.html">InfoVis Project</a>
@@ -57,30 +59,15 @@ body,#graph-container {
 	</nav>
 
 
-
-
-
-
 	<div id="grafo">
 
 
 
 
-		<span>- Use mouse wheelUse to zoom in or out the graph
-		<br><br>
-		- Use the bar below to set the threshold of similar nodes
-		<br>
-		<input  id="barra" data-slider-id='ex1Slider' type="text" data-slider-min="1"
-			data-slider-max="100" data-slider-step="1" data-slider-value="5" /> 
-			<br><br>
-			<font color="orange" size="6px">&#x25A0;</font> - Nodes selected in the cluster
-
-			<font color="0x009ee8ff" size="6px">&#x25A0;</font> - Nodes not selected in the cluster, but similar
-		</span>
-
-		<span id="span"><a
-			style="float: right" id="sendSelectedNodes"
-			class="btn btn-primary" onclick="sendSelectedNodes()" role="button">Send selected nodes</a>
+		<span id="span">Use mouse wheelUse to zoom in or out the graph  <a
+			style="float: right; visibility: hidden" id="sendNewCluster"
+			class="btn btn-primary" onclick="sendNodes()" role="button">Send cluster</a>
+			<br> Shift + Mouse to draw rectangle and select nodes n
 			<br><br><a style="float: left; visibility: hidden" id="userID"></a>
 		</span>
 
@@ -93,9 +80,7 @@ body,#graph-container {
 
 
 
-		<script src="./js/bootstrap-slider.js"></script>
-		<script src="./js/secondGraph.js"></script>
-
+		<script src="./js/thirdGraph.js"></script>
 	</div>
 
 </body>
