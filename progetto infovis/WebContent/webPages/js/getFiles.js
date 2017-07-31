@@ -10,10 +10,13 @@ function getFile(){
 	
 	
 	if(fileFollower.files.length != 0 && fileSimilar.files.length != 0 && fileUsers2Cliques != 0 && fileClique2Users != 0){
-		localStorage.setItem("nodes",fileFollower);
+		localStorage.setItem("follower",fileFollower);
+		localStorage.setItem("similar",fileSimilar);
+		localStorage.setItem("users2cliques",fileUsers2Cliques);
+		localStorage.setItem("cliques2users",fileClique2Users);
 		//window.location.href="./graph1.html";
 		var div = document.getElementById('input');
-		div.remove();
+		div.style.display = 'none';
 		var grafo = document.getElementById('grafo');
 		grafo.removeAttribute("style");
 		ret = 1;

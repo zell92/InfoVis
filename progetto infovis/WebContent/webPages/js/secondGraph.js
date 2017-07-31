@@ -188,7 +188,7 @@ function arrayToMap(){
 function getKSimilar(k,graphArray){
 	mapSimilar.forEach(function (item, key, mapObj) {  
 		//item = arrey dei simili
-		//key è la chiave
+		//key ï¿½ la chiave
 		if(selectedNodes.indexOf(key)>=0){
 			//console.log("chiave valida:"+key);
 
@@ -213,9 +213,9 @@ function getKSimilar(k,graphArray){
 	});  
 }
 
-// FUNZIONE PER VISUALIZZARE LE CLIQUES DEI NODI SELEZIONATI PER LA SIMILARITÀ
+// FUNZIONE PER VISUALIZZARE LE CLIQUES DEI NODI SELEZIONATI PER LA SIMILARITï¿½
 function sendSelectedNodes(){
-	//localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
+	//localStorage.setItem("nodesInside",localStorage.getItem("nodesInside"));
 	window.location.href = "./thirdGraph.html";
 }
 

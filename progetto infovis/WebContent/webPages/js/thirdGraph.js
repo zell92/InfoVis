@@ -17,7 +17,6 @@ function onLoad() {
 
 	var graph = Viva.Graph.graph();
 
-
 	//	Construct the graph
 
 	graph.clear();
@@ -192,7 +191,7 @@ function startMultiSelect(graph, renderer, layout) {
 }
 
 function sendNodes(){
-	localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
+	//localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
 	//localStorage.setItem("nodesSimilar",JSON.stringify(similar));
 	window.location.href = "./secondGraph.html";
 }

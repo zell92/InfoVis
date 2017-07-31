@@ -1,15 +1,20 @@
 function createGraphCliques(graph, selectedNodesSimilar){
 
-	var fileInput = document.getElementById('follower');
-	var users2cliquesFile = document.getElementById('users2cliques');
-	var cliques2usersFile = document.getElementById('cliques2users');
-
+	var fileInput = localStorage.getItem("follower");
+		//document.getElementById('follower');
+	var users2cliquesFile = localStorage.getItem("users2cliques");
+		//document.getElementById('users2cliques');
+	var cliques2usersFile = localStorage.getItem("cliques2users");
+		//document.getElementById('cliques2users');
+	
+	alert("funziona");
+	
 	var cliquesSet = new Set();
 	var usersSet = new Set();
-
 	// create cliques set
-	users2cliquesFile.addEventListener('change', function(e) {
+	users2cliquesFile.addEventListener('click', function(e) {
 		var file = users2cliquesFile.files[0];
+		alert("god");
 		var textType = /text.*/;
 		var row;
 		if (file.type.match(textType)) {
@@ -38,7 +43,7 @@ function createGraphCliques(graph, selectedNodesSimilar){
 
 
 	// create users set
-	cliques2usersFile.addEventListener('change', function(e) {
+	cliques2usersFile.addEventListener('click', function(e) {
 		var file = cliques2usersFile.files[0];
 		var textType = /text.*/;
 		var row;
@@ -68,7 +73,7 @@ function createGraphCliques(graph, selectedNodesSimilar){
 
 
 	// create users node
-	fileInput.addEventListener('change', function(e) {
+	fileInput.addEventListener('click', function(e) {
 		var file = fileInput.files[0];
 		var textType = /text.*/;
 		var row;
