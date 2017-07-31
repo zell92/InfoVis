@@ -2,7 +2,7 @@
  * this demo shows one possible way of implementing "area" selection with webgl
  * renderer
  */
-var selectedNodes;
+var selectedNodes = [];
 //var similar;
 //var similar = JSON.parse(localStorage.getItem("nodesSimilar"));
 
@@ -14,7 +14,6 @@ var bool = 0;
 var oldNode = -1;
 
 function onLoad() {
-
 	var graph = Viva.Graph.graph();
 
 	//	Construct the graph
@@ -32,7 +31,7 @@ function onLoad() {
 		dragCoeff : 0.05,
 		gravity : -1.2,
 		timeStep : 10,
-	    stableThreshold: 0.1
+		stableThreshold : 0.1
 	});
 
 
@@ -43,69 +42,72 @@ function onLoad() {
 	var events = Viva.Graph.webglInputEvents(graphics, graph);
 
 	// change color
-	events.click( function (node){
+	events.click(function(node) {
 		var userid = document.getElementById('userID');
-		if (bool==0){
+		if (bool == 0) {
 			// node
 			var nodeUI = graphics.getNodeUI(node.id);
 			nodeUI.color = 0xFFA500ff;
-			userid.innerHTML = "User ID: "+node.id;
+			userid.innerHTML = "User ID: " + node.id;
 			userid.style.color = "#FFA500ff";
 			userid.style.visibility = 'visible';
 			bool = 1;
 			oldNode = node.id;
 
 			// link
-			graph.forEachLinkedNode(node.id, function(node, link){
-		        var linkUI = graphics.getLinkUI(link.id);
-		        linkUI.color = 4286513407;
-		    });
-		}else if(node.id !== oldNode){
+			graph.forEachLinkedNode(node.id, function(node, link) {
+				var linkUI = graphics.getLinkUI(link.id);
+				linkUI.color = 4286513407;
+			});
+		} else if (node.id !== oldNode) {
 			// node
 			var oldNodeUI = graphics.getNodeUI(oldNode);
 			var nodeUI = graphics.getNodeUI(node.id);
-			oldNodeUI.color = 0x009ee8ff;
+			if (selectedNodes.indexOf(oldNode) == -1) {
+				oldNodeUI.color = 0x009ee8ff;
+			}
 			nodeUI.color = 0xFFA500ff;
-			userid.innerHTML = "User ID: "+node.id;
+			userid.innerHTML = "User ID: " + node.id;
 			userid.style.color = "#FFA500ff";
 			userid.style.visibility = 'visible';
 
 			// link
-			graph.forEachLinkedNode(oldNode, function(node, link){
-		        var linkUI = graphics.getLinkUI(link.id);
-		        linkUI.color = 3014898687;
-		    });
-		    graph.forEachLinkedNode(node.id, function(node, link){
-		        var linkUI = graphics.getLinkUI(link.id);
-		        linkUI.color = 4286513407;
-		    });
+			graph.forEachLinkedNode(oldNode, function(node, link) {
+				var linkUI = graphics.getLinkUI(link.id);
+				linkUI.color = 3014898687;
+			});
+			graph.forEachLinkedNode(node.id, function(node, link) {
+				var linkUI = graphics.getLinkUI(link.id);
+				linkUI.color = 4286513407;
+			});
 
-		    oldNode = node.id;
-		}
-		else{
+			oldNode = node.id;
+		} else {
 			// node
 			var nodeUI = graphics.getNodeUI(node.id);
-			nodeUI.color = 0x009ee8ff;
+			if (selectedNodes.indexOf(oldNode) == -1) {
+				nodeUI.color = 0x009ee8ff;
+			}
 			userid.style.visibility = 'hidden';
 			bool = 0;
 			oldNode = -1;
 
 			// link
-			graph.forEachLinkedNode(node.id, function(node, link){
-		        var linkUI = graphics.getLinkUI(link.id);
-		        linkUI.color = 3014898687;
-		    });
+			graph.forEachLinkedNode(node.id, function(node, link) {
+				var linkUI = graphics.getLinkUI(link.id);
+				linkUI.color = 3014898687;
+			});
 		}
 	});
-	
+
 
 	var renderer = Viva.Graph.View.renderer(graph, {
-		layout: layout,
-		graphics: graphics,
-		container: document.getElementById('graph-container')
+		layout : layout,
+		graphics : graphics,
+		container : document.getElementById('graph-container')
 	});
 	var multiSelectOverlay;
-	
+
 	renderer.run();
 
 	document.addEventListener('keydown', function(e) {
@@ -137,20 +139,20 @@ function startMultiSelect(graph, renderer, layout) {
 
 
 		var topLeft = graphics.transformClientToGraphCoordinates({
-			x: area.x - (offsetSide*2),
-			y: area.y - offset - graphTop
+			x : area.x - (offsetSide * 2),
+			y : area.y - offset - graphTop
 		});
 		var bottomRight = graphics.transformClientToGraphCoordinates({
-			x: area.x + area.width -(offsetSide*2),
-			y: area.y + area.height - offset - graphTop
+			x : area.x + area.width - (offsetSide * 2),
+			y : area.y + area.height - offset - graphTop
 		});
 
 		//NODI SELEZIONATI
-		var nodesInside =[];
+		var nodesInside = [];
 
 		//SELEZIONA I NODI E LI METTE NELL'ARRAY
-		graph.forEachNode(higlightIfInside,nodesInside);
-		selectedNodes=nodesInside;
+		graph.forEachNode(higlightIfInside, nodesInside);
+		selectedNodes = nodesInside;
 		//DISEGNA
 		renderer.rerender();
 
@@ -165,19 +167,21 @@ function startMultiSelect(graph, renderer, layout) {
 				nodeUI.color = 0xFFA500ff;
 				nodeUI.size = 20;
 				nodesInside.push(node.id)
-				//console.log(node.id);
+			//console.log(node.id);
 			} else {
-				nodeUI.color = 0x009ee8ff;
+				if (node.id != oldNode) {
+					nodeUI.color = 0x009ee8ff;
+				}
 				nodeUI.size = 10;
 			}
 			var button = document.getElementById('sendNewCluster');
-			if (nodesInside.length==0){
+			if (nodesInside.length == 0) {
 
 				button.style.visibility = 'hidden';
-			}else{
+			} else {
 				button.style.visibility = 'visible';
 			}
-			//document.getElementById("elem").innerHTML = nodesInside.toString();;
+		//document.getElementById("elem").innerHTML = nodesInside.toString();;
 		}
 
 
@@ -185,12 +189,12 @@ function startMultiSelect(graph, renderer, layout) {
 		function isInside(nodeId, topLeft, bottomRight) {
 			var nodePos = layout.getNodePosition(nodeId);
 			return (topLeft.x < nodePos.x && nodePos.x < bottomRight.x &&
-					topLeft.y < nodePos.y && nodePos.y < bottomRight.y);
+				topLeft.y < nodePos.y && nodePos.y < bottomRight.y);
 		}
 	}
 }
 
-function sendNodes(){
+function sendNodes() {
 	//localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
 	//localStorage.setItem("nodesSimilar",JSON.stringify(similar));
 	window.location.href = "./secondGraph.html";
@@ -208,10 +212,10 @@ function createOverlay(overlayDom) {
 	var notify = [];
 	var dragndrop = Viva.Graph.Utils.dragndrop(overlayDom);
 	var selectedArea = {
-			x: 0,
-			y: 0,
-			width: 0,
-			height: 0
+		x : 0,
+		y : 0,
+		width : 0,
+		height : 0
 	};
 	var startX = 0;
 	var startY = 0;
@@ -238,10 +242,10 @@ function createOverlay(overlayDom) {
 	overlayDom.style.display = 'block';
 
 	return {
-		onAreaSelected: function(cb) {
+		onAreaSelected : function(cb) {
 			notify.push(cb);
 		},
-		destroy: function () {
+		destroy : function() {
 			overlayDom.style.display = 'none';
 			dragndrop.release();
 		}
@@ -261,10 +265,8 @@ function createOverlay(overlayDom) {
 	}
 
 	function updateSelectedAreaIndicator() {
-		
-
 		selectionIndicator.style.left = selectedArea.x - offsetSide + 'px';
-		selectionIndicator.style.top = selectedArea.y-offset + 'px';
+		selectionIndicator.style.top = selectedArea.y - offset + 'px';
 		selectionIndicator.style.width = selectedArea.width + 'px';
 		selectionIndicator.style.height = selectedArea.height + 'px';
 	}
