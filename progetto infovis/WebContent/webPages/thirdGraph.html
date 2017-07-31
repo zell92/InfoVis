@@ -8,24 +8,22 @@
 <link rel="icon" type="img/ico" href="./favicon.ico">
 
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
-<script src="./js/mapSimilarCreator.js"></script>
-<script src="./js/getFiles.js"></script>
-<script src="./js/graphCreator.js"></script>
+<script src="./js/thirdGraph.js"></script>
 <script src="./js/graphCreatorCliques.js"></script>
+<script src="./js/parser.js"></script>
 
 <style type='text/css'>
-
-body,#graph-container {
-font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
+body, #graph-container {
+	font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
 		sans-serif;
 	font-size: 14px;
 	height: 100%;
 	width: 98%;
-	margin-left:1%;
-	margin-right:1%;
+	margin-left: 1%;
+	margin-right: 1%;
 	position: absolute;
 	overflow: hidden;
-	cursor:default;
+	cursor: default;
 }
 
 .graph-overlay {
@@ -42,45 +40,39 @@ font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
 	background: transparent;
 	border: 1px solid orange;
 }
-
 </style>
 <link rel="stylesheet" type="text/css" href="css/local.css" />
 
 </head>
 <body onload="onLoad()">
 
-
-
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navTop">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"
+		id="navTop">
 		<div class="navbar-header">
-
 			<a class="navbar-brand" href="./index.html">InfoVis Project</a>
 		</div>
 	</nav>
 
-
 	<div id="grafo">
 
-
-
-
-		<span id="span">Use mouse wheelUse to zoom in or out the graph  <a
-			style="float: right; visibility: hidden" id="sendNewCluster"
-			class="btn btn-primary" onclick="sendNodes()" role="button">Send cluster</a>
-			<br> Shift + Mouse to draw rectangle and select nodes n
-			<br><br><a style="float: left; visibility: hidden" id="userID"></a>
+		<span id="span">Use mouse wheelUse to zoom in or out the graph
+			<a style="float: right; visibility: hidden" id="sendNewCluster"
+			class="btn btn-primary" onclick="sendNodes()" role="button">Send
+				cluster</a> <br> Shift + Mouse to draw rectangle and select nodes n
+			<br> <br> <a style="float: left; visibility: hidden"
+			id="userID"></a>
 		</span>
-
-
-
 
 		<div id="graph-container"></div>
 		<div class="graph-overlay"></div>
 
+		<div id="graph-container"></div>
+		<div class="graph-overlay"></div>
 
+		<iframe id="frm_1" src="data/u2c.txt" style="display: none;"></iframe>
+		<iframe id="frm_2" src="data/c2u.txt" style="display: none;"></iframe>
+		<iframe id="frm_3" src="data/follower.txt" style="display: none;"></iframe>
 
-
-		<script src="./js/thirdGraph.js"></script>
 	</div>
 
 </body>

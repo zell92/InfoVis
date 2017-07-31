@@ -8,89 +8,45 @@ function createGraphCliques(graph, selectedNodesSimilar) {
 
 	var cliquesSet = new Set();
 	var usersSet = new Set();
+	
+	
+	
 	// create cliques set
-	
-	var file = users2cliquesFile;
-	var textType = /text.*/;
-	var row;
-	
-	
-	if (file.type.match(textType)) {
-		var reader = new FileReader();
-		alert("god");
-		reader.onload = function(e) {
-
-			var text = reader.result;
-
-			var lines = text.split(/[\r\n]+/g); // tolerate both Windows and Unix linebreaks
-
-			for (var i = 0; i < lines.length; i++) {
-				row = lines[i].split(" ");
-				if (row.length > 1 && (selectedNodesSimilar.indexOf(row[0]) != -1)) {
-					for (var h = 1; h < row.length; h++) {
-						if (row[h].length > 0) {
-							cliquesSet.add(row[h]);
-						}
-					}
+	var array_u2c = LoadFile('frm_1');
+	for (var i = 0; i < array_u2c[0].length; i++) {
+		row = lines[i].split(" ");
+		if (array_u2c[1].length > 1 && (selectedNodesSimilar.indexOf(array_u2c[i][0]) != -1)) {
+			for (var h = 1; h < array_u2c[1].length; h++) {
+				if (array_u2c[i][h].length > 0) {
+					cliquesSet.add(array_u2c[i][h]);
 				}
 			}
 		}
-		reader.readAsText(file);
 	}
-
-
+	alert("2");
 	// create users set
-
-	file = cliques2usersFile;
-	if (file.type.match(textType)) {
-		var reader = new FileReader();
-
-		reader.onload = function(e) {
-
-			var text = reader.result;
-
-			var lines = text.split(/[\r\n]+/g); // tolerate both Windows and Unix linebreaks
-
-			for (var i = 0; i < lines.length; i++) {
-				row = lines[i].split(" ");
-				if (row.length > 1) {
-					for (var h = 1; h < row.length; h++) {
-						if (row[h].length > 0) {
-							usersSet.add(row[h]);
-						}
-					}
+	var array_c2u = LoadFile('frm_2');
+	for (var i = 0; i < array_c2u[0].length; i++) {
+		if (array_c2u[1].length > 1) {
+			for (var h = 1; h < array_c2u[1].length; h++) {
+				if (array_c2u[i][h].length > 0) {
+					usersSet.add(array_c2u[i][h]);
 				}
 			}
 		}
-		reader.readAsText(file);
 	}
-
 
 	// create users node
-	file = fileInput;
+	var array_follower = LoadFile('frm_3');
 	graph.clear();
-	if (file.type.match(textType)) {
-		var reader = new FileReader();
-
-		reader.onload = function(e) {
-
-			var text = reader.result;
-
-			var lines = text.split(/[\r\n]+/g); // tolerate both Windows and Unix linebreaks
-
-			for (var i = 0; i < lines.length; i++) {
-				row = lines[i].split(" ");
-				if (row.length > 1 && usersSet.has(row[0])) {
-					for (var h = 1; h < row.length; h++)
-						if (row[h].length > 0 && usersSet.has(row[h]))
-							graph.addLink(row[0], row[h]);
-				} else {
-					if (row[0].length > 0 && usersSet.has(row[0]))
-						graph.addNode(row[0]);
-				}
-			}
+	for (var i = 0; i < array_follower[0].length; i++) {
+		if (array_follower[1].length > 1 && usersSet.has(array_follower[i][0])) {
+			for (var h = 1; h < array_follower[1].length; h++)
+				if (array_follower[i][h].length > 0 && usersSet.has(array_follower[i][h]))
+					graph.addLink(array_follower[i][0], array_follower[i][h]);
+		} else {
+			if (array_follower[i][0].length > 0 && usersSet.has(array_follower[i][0]))
+				graph.addNode(array_follower[i][0]);
 		}
-		reader.readAsText(file);
 	}
-
 }

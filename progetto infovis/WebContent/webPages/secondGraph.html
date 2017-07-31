@@ -17,14 +17,13 @@
 	background: #BABABA;
 }
 
-body,#graph-container {
+body, #graph-container {
 	height: 100%;
 	width: 98%;
-	margin-left:1%;
-	margin-right:1%;
+	margin-left: 1%;
+	margin-right: 1%;
 	position: absolute;
 	overflow: hidden;
-	
 }
 
 .graph-overlay {
@@ -47,51 +46,26 @@ body,#graph-container {
 </head>
 <body onload="onLoad()">
 
-
-
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
-
 			<a class="navbar-brand" href="./index.html">InfoVis Project</a>
 		</div>
 	</nav>
 
-
-
-
-
-
 	<div id="grafo">
 
-
-
-
-		<span>- Use mouse wheelUse to zoom in or out the graph
-		<br><br>
-		- Use the bar below to set the threshold of similar nodes
-		<br>
-		<input  id="barra" data-slider-id='ex1Slider' type="text" data-slider-min="1"
-			data-slider-max="100" data-slider-step="1" data-slider-value="5" /> 
-			<br><br>
-			<font color="orange" size="6px">&#x25A0;</font> - Nodes selected in the cluster
-
-			<font color="0x009ee8ff" size="6px">&#x25A0;</font> - Nodes not selected in the cluster, but similar
-		</span>
-
-		<span id="span"><a
-			style="float: right" id="sendSelectedNodes"
-			class="btn btn-primary" onclick="sendSelectedNodes()" role="button">Send selected nodes</a>
-			<br><br><a style="float: left; visibility: hidden" id="userID"></a>
-		</span>
-
-
-
-
-		<div id="graph-container"></div>
-		<div class="graph-overlay"></div>
-
-
-
+		<span>- Use mouse wheelUse to zoom in or out the graph <br>
+			<br> - Use the bar below to set the threshold of similar nodes <br>
+			<input id="barra" data-slider-id='ex1Slider' type="text"
+			data-slider-min="1" data-slider-max="100" data-slider-step="1"
+			data-slider-value="5" /> <br> <br> <font color="orange"
+			size="6px">&#x25A0;</font> - Nodes selected in the cluster <font
+			color="0x009ee8ff" size="6px">&#x25A0;</font> - Nodes not selected in
+			the cluster, but similar
+		</span> <span id="span"><a style="float: right" id="sendSelectedNodes"
+			class="btn btn-primary" onclick="sendSelectedNodes()" role="button">Send
+				selected nodes</a> <br> <br> <a
+			style="float: left; visibility: hidden" id="userID"></a> </span>
 
 		<script src="./js/bootstrap-slider.js"></script>
 		<script src="./js/secondGraph.js"></script>
