@@ -1,11 +1,5 @@
 function createGraphCliques(graph, selectedNodesSimilar) {
-	var fileInput = localStorage.getItem("follower");
-	//document.getElementById('follower');
-	var users2cliquesFile = localStorage.getItem("users2cliques");
-	//document.getElementById('users2cliques');
-	var cliques2usersFile = localStorage.getItem("cliques2users");
-	//document.getElementById('cliques2users');
-
+	
 	var cliquesSet = new Set();
 	var usersSet = new Set();
 	
@@ -24,9 +18,7 @@ function createGraphCliques(graph, selectedNodesSimilar) {
 	// create users set
 	var array_c2u = LoadFile('frm_2');
 	for (var i = 0; i < array_c2u.length; i++) {
-		
-		if (array_c2u[i].length > 1) {
-			alert("finito");
+		if (array_c2u[i].length > 1 && (cliquesSet.has(array_c2u[i][0]))) {
 			for (var h = 1; h < array_c2u[i].length; h++) {
 				if (array_c2u[i][h].length > 0) {
 					usersSet.add(array_c2u[i][h]);

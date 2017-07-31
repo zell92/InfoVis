@@ -11,7 +11,6 @@
 <script src="./js/thirdGraph.js"></script>
 <script src="./js/graphCreatorCliques.js"></script>
 <script src="./js/parser.js"></script>
-
 <style type='text/css'>
 body, #graph-container {
 	font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial,
@@ -45,7 +44,9 @@ body, #graph-container {
 
 </head>
 <body onload="onLoad()">
-
+	<iframe id="frm_1" src="data/u2c.txt" style="display: none;"></iframe>
+	<iframe id="frm_2" src="data/c2u.txt" style="display: none;"></iframe>
+	<iframe id="frm_3" src="data/follower.txt" style="display: none;"></iframe>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"
 		id="navTop">
 		<div class="navbar-header">
@@ -56,7 +57,7 @@ body, #graph-container {
 	<div id="grafo">
 
 		<span id="span">Use mouse wheelUse to zoom in or out the graph
-			<a style="float: right; visibility: hidden" id="sendNewCluster"
+			<a style="float: right; visibility: hidden" id="sendCluster"
 			class="btn btn-primary" onclick="sendNodes()" role="button">Send
 				cluster</a> <br> Shift + Mouse to draw rectangle and select nodes n
 			<br> <br> <a style="float: left; visibility: hidden"
@@ -68,10 +69,6 @@ body, #graph-container {
 
 		<div id="graph-container"></div>
 		<div class="graph-overlay"></div>
-
-		<iframe id="frm_1" src="data/u2c.txt" style="display: none;"></iframe>
-		<iframe id="frm_2" src="data/c2u.txt" style="display: none;"></iframe>
-		<iframe id="frm_3" src="data/follower.txt" style="display: none;"></iframe>
 
 	</div>
 

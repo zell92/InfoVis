@@ -9,6 +9,14 @@ var selectedNodes = [];
 //ARRAY DEI NODI SELEZIONATI PER LA SIMILARITÀ
 var selectedNodesSimilar = JSON.parse(localStorage.getItem("nodesInside"));
 
+//OFFSET PER LA PARTE SUPERIORE
+var offset = 70;
+//OFFSET PER LA PARTE LATERALE
+var body = document.getElementsByTagName("BODY")[0];
+var style = window.getComputedStyle(body);
+var marginLeft = parseFloat(style.getPropertyValue('margin-left'));
+var offsetSide = marginLeft;
+
 // variabile per l'evento click
 var bool = 0;
 var oldNode = -1;
@@ -18,12 +26,7 @@ function onLoad() {
 
 	//	Construct the graph
 
-	graph.clear();
-
 	createGraphCliques(graph, selectedNodesSimilar);
-
-	//similar = createArraySimilar();
-
 
 	var layout = Viva.Graph.Layout.forceDirected(graph, {
 		springLength : 100,
@@ -34,15 +37,13 @@ function onLoad() {
 		stableThreshold : 0.1
 	});
 
-
 	var graphics = Viva.Graph.View.webglGraphics();
-
 
 	// event interaction : add children node.
 	var events = Viva.Graph.webglInputEvents(graphics, graph);
-
 	// change color
 	events.click(function(node) {
+		
 		var userid = document.getElementById('userID');
 		if (bool == 0) {
 			// node
@@ -100,7 +101,6 @@ function onLoad() {
 		}
 	});
 
-
 	var renderer = Viva.Graph.View.renderer(graph, {
 		layout : layout,
 		graphics : graphics,
@@ -129,7 +129,7 @@ function startMultiSelect(graph, renderer, layout) {
 	var domOverlay = document.querySelector('.graph-overlay');
 	var overlay = createOverlay(domOverlay);
 	overlay.onAreaSelected(handleAreaSelected);
-
+	
 	return overlay;
 
 	function handleAreaSelected(area) {
@@ -137,7 +137,7 @@ function startMultiSelect(graph, renderer, layout) {
 		// Could be improved with spatial indexing if required.
 		var graphTop = document.getElementById('graph-container').offsetTop;
 
-
+		
 		var topLeft = graphics.transformClientToGraphCoordinates({
 			x : area.x - (offsetSide * 2),
 			y : area.y - offset - graphTop
@@ -158,10 +158,8 @@ function startMultiSelect(graph, renderer, layout) {
 
 		return;
 
-
-
-
 		function higlightIfInside(node) {
+			
 			var nodeUI = graphics.getNodeUI(node.id);
 			if (isInside(node.id, topLeft, bottomRight)) {
 				nodeUI.color = 0xFFA500ff;
@@ -184,8 +182,6 @@ function startMultiSelect(graph, renderer, layout) {
 		//document.getElementById("elem").innerHTML = nodesInside.toString();;
 		}
 
-
-
 		function isInside(nodeId, topLeft, bottomRight) {
 			var nodePos = layout.getNodePosition(nodeId);
 			return (topLeft.x < nodePos.x && nodePos.x < bottomRight.x &&
@@ -195,12 +191,13 @@ function startMultiSelect(graph, renderer, layout) {
 }
 
 function sendNodes() {
-	//localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
+	localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
 	//localStorage.setItem("nodesSimilar",JSON.stringify(similar));
 	window.location.href = "./secondGraph.html";
 }
 
 function createOverlay(overlayDom) {
+
 	var selectionClasName = 'graph-selection-indicator';
 	var selectionIndicator = overlayDom.querySelector('.' + selectionClasName);
 	if (!selectionIndicator) {
