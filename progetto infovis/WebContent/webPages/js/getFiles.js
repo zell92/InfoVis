@@ -14,7 +14,7 @@ function getFile(){
 		localStorage.setItem("similar",fileSimilar);
 		localStorage.setItem("users2cliques",fileUsers2Cliques);
 		localStorage.setItem("cliques2users",fileClique2Users);
-		//window.location.href="./graph1.html";
+		//window.location.href="./thirdGraph.html";
 		var div = document.getElementById('input');
 		div.style.display = 'none';
 		var grafo = document.getElementById('grafo');
