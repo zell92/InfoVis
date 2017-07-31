@@ -9,12 +9,9 @@ function createGraphCliques(graph, selectedNodesSimilar) {
 	var cliquesSet = new Set();
 	var usersSet = new Set();
 	
-	
-	
 	// create cliques set
 	var array_u2c = LoadFile('frm_1');
-	for (var i = 0; i < array_u2c[0].length; i++) {
-		row = lines[i].split(" ");
+	for (var i = 0; i < array_u2c.length; i++) {
 		if (array_u2c[1].length > 1 && (selectedNodesSimilar.indexOf(array_u2c[i][0]) != -1)) {
 			for (var h = 1; h < array_u2c[1].length; h++) {
 				if (array_u2c[i][h].length > 0) {
@@ -23,10 +20,10 @@ function createGraphCliques(graph, selectedNodesSimilar) {
 			}
 		}
 	}
-	alert("2");
+	
 	// create users set
 	var array_c2u = LoadFile('frm_2');
-	for (var i = 0; i < array_c2u[0].length; i++) {
+	for (var i = 0; i < array_c2u.length; i++) {
 		if (array_c2u[1].length > 1) {
 			for (var h = 1; h < array_c2u[1].length; h++) {
 				if (array_c2u[i][h].length > 0) {
@@ -35,11 +32,12 @@ function createGraphCliques(graph, selectedNodesSimilar) {
 			}
 		}
 	}
-
+	alert("finito");
+	
 	// create users node
 	var array_follower = LoadFile('frm_3');
 	graph.clear();
-	for (var i = 0; i < array_follower[0].length; i++) {
+	for (var i = 0; i < array_follower.length; i++) {
 		if (array_follower[1].length > 1 && usersSet.has(array_follower[i][0])) {
 			for (var h = 1; h < array_follower[1].length; h++)
 				if (array_follower[i][h].length > 0 && usersSet.has(array_follower[i][h]))
