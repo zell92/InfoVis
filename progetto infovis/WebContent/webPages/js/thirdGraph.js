@@ -172,7 +172,7 @@ function startMultiSelect(graph, renderer, layout) {
 				}
 				nodeUI.size = 10;
 			}
-			var button = document.getElementById('sendNewCluster');
+			var button = document.getElementById('sendCluster');
 			if (nodesInside.length == 0) {
 
 				button.style.visibility = 'hidden';

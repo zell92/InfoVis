@@ -8,7 +8,9 @@
 <link rel="icon" type="img/ico" href="./favicon.ico">
 
 <script src="./js/vivaGraph/dist/vivagraph.js"></script>
-<script src="./js/thirdGraph.js"></script>
+<script src="./js/mapSimilarCreator.js"></script>
+<script src="./js/getFiles.js"></script>
+<script src="./js/graphCreator.js"></script>
 <script src="./js/graphCreatorCliques.js"></script>
 <script src="./js/parser.js"></script>
 <style type='text/css'>
@@ -44,9 +46,11 @@ body, #graph-container {
 
 </head>
 <body onload="onLoad()">
+
 	<iframe id="frm_1" src="data/u2c.txt" style="display: none;"></iframe>
 	<iframe id="frm_2" src="data/c2u.txt" style="display: none;"></iframe>
 	<iframe id="frm_3" src="data/follower.txt" style="display: none;"></iframe>
+	
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"
 		id="navTop">
 		<div class="navbar-header">
@@ -67,8 +71,7 @@ body, #graph-container {
 		<div id="graph-container"></div>
 		<div class="graph-overlay"></div>
 
-		<div id="graph-container"></div>
-		<div class="graph-overlay"></div>
+		<script src="./js/thirdGraph.js"></script>
 
 	</div>
 
