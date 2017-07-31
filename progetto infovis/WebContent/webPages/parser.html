@@ -5,10 +5,12 @@
 
 </head>
 <body onload="LoadFile('frmFile')">
-	<iframe id="frmFile" src="./c2u.txt" onload="LoadFile();"
+	<iframe id="frmFile" src="data/c2u.txt" onload="LoadFile();"
 		style="display: none;"></iframe>
 </body>
 <script type="text/javascript">
+
+	var nodeArray = new Array();
 
 	function LoadFile(id) {
 		var oFrame = document.getElementById(id);
