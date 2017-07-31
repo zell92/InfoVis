@@ -24,7 +24,9 @@ function createGraphCliques(graph, selectedNodesSimilar) {
 	// create users set
 	var array_c2u = LoadFile('frm_2');
 	for (var i = 0; i < array_c2u.length; i++) {
+		
 		if (array_c2u[1].length > 1) {
+			alert("finito");
 			for (var h = 1; h < array_c2u[1].length; h++) {
 				if (array_c2u[i][h].length > 0) {
 					usersSet.add(array_c2u[i][h]);
@@ -32,7 +34,7 @@ function createGraphCliques(graph, selectedNodesSimilar) {
 			}
 		}
 	}
-	alert("finito");
+	
 	
 	// create users node
 	var array_follower = LoadFile('frm_3');
