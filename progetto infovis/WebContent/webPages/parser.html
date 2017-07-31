@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+</head>
+<body onload="LoadFile('frmFile')">
+	<iframe id="frmFile" src="./c2u.txt" onload="LoadFile();"
+		style="display: none;"></iframe>
+</body>
+<script type="text/javascript">
+
+	var nodeArray = new Array();
+
+	function LoadFile(id) {
+		var oFrame = document.getElementById(id);
+		var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML.replace(/\r/g, '');
+		var arrLines = strRawContents.split("\n");
+		var array_di_array = new Array();
+		var i = 0;
+		for (i = 0; i < arrLines.length; i++) {
+			var token = arrLines[i].split(" ");
+			array_di_array.push(token);
+		}
+		var j = 0;
+		for (j = 0; j < array_di_array.length; j++) {
+			document.write(array_di_array[j].toString());
+		}
+	}
+</script>
+</html>
