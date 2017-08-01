@@ -1,10 +1,13 @@
 /**
- * this demo shows one possible way of implementing "area" selection with webgl
- * renderer
+ * Infovis Project
+ * @author Giuseppe Valentino Baldi
+ * @author Marco Lorini
+ * @author Nicola Sardella
+ * 
+ * @description gestione per la terza schermata
+ * 
  */
 var selectedNodes = [];
-//var similar;
-//var similar = JSON.parse(localStorage.getItem("nodesSimilar"));
 
 //ARRAY DEI NODI SELEZIONATI PER LA SIMILARITÀ
 var selectedNodesSimilar = JSON.parse(localStorage.getItem("nodesInside"));
@@ -165,7 +168,6 @@ function startMultiSelect(graph, renderer, layout) {
 				nodeUI.color = 0xFFA500ff;
 				nodeUI.size = 20;
 				nodesInside.push(node.id)
-			//console.log(node.id);
 			} else {
 				if (node.id != oldNode) {
 					nodeUI.color = 0x009ee8ff;
@@ -179,7 +181,6 @@ function startMultiSelect(graph, renderer, layout) {
 			} else {
 				button.style.visibility = 'visible';
 			}
-		//document.getElementById("elem").innerHTML = nodesInside.toString();;
 		}
 
 		function isInside(nodeId, topLeft, bottomRight) {
@@ -192,7 +193,6 @@ function startMultiSelect(graph, renderer, layout) {
 
 function sendNodes() {
 	localStorage.setItem("nodesInside",JSON.stringify(selectedNodes));
-	//localStorage.setItem("nodesSimilar",JSON.stringify(similar));
 	window.location.href = "./secondGraph.html";
 }
 

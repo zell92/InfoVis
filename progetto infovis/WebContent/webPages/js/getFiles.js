@@ -1,3 +1,12 @@
+/**
+ * Infovis Project
+ * @author Giuseppe Valentino Baldi
+ * @author Marco Lorini
+ * @author Nicola Sardella
+ * 
+ * @description caricamento dei file
+ * 
+ */
 function getFile(){
 	var ret=0;
 	var fileFollower = document.getElementById('follower');

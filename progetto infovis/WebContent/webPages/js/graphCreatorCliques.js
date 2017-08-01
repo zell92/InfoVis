@@ -1,3 +1,12 @@
+/**
+ * Infovis Project
+ * @author Giuseppe Valentino Baldi
+ * @author Marco Lorini
+ * @author Nicola Sardella
+ * 
+ * @description crostruzione della clique
+ * 
+ */
 function createGraphCliques(graph, selectedNodesSimilar) {
 	
 	var cliquesSet = new Set();

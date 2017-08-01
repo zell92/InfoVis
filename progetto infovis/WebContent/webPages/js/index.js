@@ -1,6 +1,11 @@
 /**
- * this demo shows one possible way of implementing "area" selection with webgl
- * renderer
+ * Infovis Project
+ * @author Giuseppe Valentino Baldi
+ * @author Marco Lorini
+ * @author Nicola Sardella
+ * 
+ * @description gestione della prima schermata
+ * 
  */
 var selectedNodes = [];
 var similar;
@@ -120,7 +125,6 @@ function onLoad() {
 	var sendButton = document.getElementById("button");
 
 	sendButton.onclick = function() {
-		//alert(similar.length);
 		getFile();
 		renderer.run();
 	}
@@ -196,7 +200,6 @@ function startMultiSelect(graph, renderer, layout) {
 			} else {
 				button.style.visibility = 'visible';
 			}
-		//document.getElementById("elem").innerHTML = nodesInside.toString();;
 		}
 
 

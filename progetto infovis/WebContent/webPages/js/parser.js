@@ -1,3 +1,12 @@
+/**
+ * Infovis Project
+ * @author Giuseppe Valentino Baldi
+ * @author Marco Lorini
+ * @author Nicola Sardella
+ * 
+ * @description carico il file in un array di array
+ * 
+ */
 function LoadFile(id) {
 	var oFrame = document.getElementById(id);
 	var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML.replace(/\r/g, '');

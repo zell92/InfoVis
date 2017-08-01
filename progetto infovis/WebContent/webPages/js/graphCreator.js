@@ -1,3 +1,12 @@
+/**
+ * Infovis Project
+ * @author Giuseppe Valentino Baldi
+ * @author Marco Lorini
+ * @author Nicola Sardella
+ * 
+ * @description costruzione del primo grafo dei follower
+ * 
+ */
 function createGraph(graph){
 	var fileInput = document.getElementById('follower');
 
