@@ -166,7 +166,6 @@ function onLoad() {
 
 			});
 			renderer.rerender();
-
 		}
 
 	});
