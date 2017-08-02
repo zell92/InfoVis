@@ -57,7 +57,6 @@ if (isset ( $_FILES ['follower'] ) && isset ( $_FILES ['similar'] ) && isset ( $
 		unlink ( "data/similar.gz" );
 		unlink ( "data/c2u.gz" );
 		unlink ( "data/u2c.gz" );
-		exit ();
 	} else {
 		print_r ( $errors );
 	}
