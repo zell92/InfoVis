@@ -1,9 +1,5 @@
 <?php
-ini_set('upload_max_filesize', '50M');
-ini_set('post_max_size', '50M');
-ini_set('max_input_time', 300);
-ini_set('max_execution_time', 300);
-if (isset ( $_FILES ['follower'] ) && isset ( $_FILES ['similar'] ) && isset ( $_FILES ['c2u'] ) && isset ( $_FILES ['u2c'] )) {
+if (isset ( $_FILES ['follower'] ) && isset ( $_FILES ['similar'] ) && isset ( $_FILES ['c2u_u2c'] )) {
 	$errors = array ();
 	
 	$file_name_follower = $_FILES ['follower'] ['name'];
@@ -18,54 +14,37 @@ if (isset ( $_FILES ['follower'] ) && isset ( $_FILES ['similar'] ) && isset ( $
 	$file_type_similar = $_FILES ['similar'] ['type'];
 	$file_ext_similar = strtolower ( end ( explode ( '.', $_FILES ['similar'] ['name'] ) ) );
 	
-	$file_name_c2u = $_FILES ['c2u'] ['name'];
-	$file_size_c2u = $_FILES ['c2u'] ['size'];
-	$file_tmp_c2u = $_FILES ['c2u'] ['tmp_name'];
-	$file_type_c2u = $_FILES ['c2u'] ['type'];
-	$file_ext_c2u = strtolower ( end ( explode ( '.', $_FILES ['c2u'] ['name'] ) ) );
-	
-	$file_name_u2c = $_FILES ['u2c'] ['name'];
-	$file_size_u2c = $_FILES ['u2c'] ['size'];
-	$file_tmp_u2c = $_FILES ['u2c'] ['tmp_name'];
-	$file_type_u2c = $_FILES ['u2c'] ['type'];
-	$file_ext_u2c = strtolower ( end ( explode ( '.', $_FILES ['u2c'] ['name'] ) ) );
+	$file_name_c2u_u2c = $_FILES ['c2u_u2c'] ['name'];
+	$file_size_c2u_u2c = $_FILES ['c2u_u2c'] ['size'];
+	$file_tmp_c2u_u2c = $_FILES ['c2u_u2c'] ['tmp_name'];
+	$file_type_c2u_u2c = $_FILES ['c2u_u2c'] ['type'];
+	$file_ext_c2u_u2c = strtolower ( end ( explode ( '.', $_FILES ['c2u_u2c'] ['name'] ) ) );
 	
 	$expensions = array (
-			"txt" 
+			"txt",
+			"zip" 
 	);
 	
-	if (in_array ( $file_ext_follower, $expensions ) === false && in_array ( $file_ext_similar, $expensions ) === false && in_array ( $file_ext_c2u, $expensions ) === false && in_array ( $file_ext_u2c, $expensions ) === false) {
+	if (in_array ( $file_ext_follower, $expensions ) === false && in_array ( $file_ext_similar, $expensions ) === false && in_array ( $file_ext_c2u_u2c, $expensions ) === false) {
 		$errors [] = "extension not allowed, please choose a txt file.";
 	}
 	
-	if ($file_size_follower > 5500000 && $file_size_similar > 5500000 && $file_size_c2u > 5500000 && $file_size_u2c > 5500000) {
+	if ($file_size_follower > 5500000 && $file_size_similar > 5500000 && $file_size_c2u_u2c > 5500000) {
 		$errors [] = "File size must be excately 55 MB";
 	}
 	
 	if (empty ( $errors ) == true) {
-		$file_gz_temp = gzCompressFile ( $file_tmp_follower, 9 );
-		stream_copy_to_stream ( fopen ( $file_gz_temp, 'r' ), fopen ( "data/follower.gz", 'w+' ) );
-		$file_gz_temp = gzCompressFile ( $file_tmp_similar, 9 );
-		stream_copy_to_stream ( fopen ( $file_gz_temp, 'r' ), fopen ( "data/similar.gz", 'w+' ) );
-		$file_gz_temp = gzCompressFile ( $file_tmp_c2u, 9 );
-		stream_copy_to_stream ( fopen ( $file_gz_temp, 'r' ), fopen ( "data/c2u.gz", 'w+' ) );
-		$file_gz_temp = gzCompressFile ( $file_tmp_u2c, 9 );
-		stream_copy_to_stream ( fopen ( $file_gz_temp, 'r' ), fopen ( "data/u2c.gz", 'w+' ) );
-		gzDecompressFile ( "data/follower.txt", "data/follower.gz" );
-		gzDecompressFile ( "data/similar.txt", "data/similar.gz" );
-		gzDecompressFile ( "data/c2u.txt", "data/c2u.gz" );
-		gzDecompressFile ( "data/u2c.txt", "data/u2c.gz" );
+		stream_copy_to_stream ( fopen ( $file_tmp_follower, 'r' ), fopen ( "data/follower.txt", 'w+' ) );
+		stream_copy_to_stream ( fopen ( $file_tmp_similar, 'r' ), fopen ( "data/similar.txt", 'w+' ) );
+		stream_copy_to_stream ( fopen ( $file_tmp_c2u_u2c, 'r' ), fopen ( "data/data.zip", 'w+' ) );
+		unZip ( "data/data.zip", "data/" );
+		unlink("data/data.zip");
 		header ( 'Location: secondGraph.html' );
-		unlink ( "data/follower.gz" );
-		unlink ( "data/similar.gz" );
-		unlink ( "data/c2u.gz" );
-		unlink ( "data/u2c.gz" );
 	} else {
 		print_r ( $errors );
 	}
-}
-else{
-	error_reporting(E_ALL);
+} else {
+	error_reporting ( E_ALL );
 }
 function gzCompressFile($source, $level) {
 	$dest = $source . '.gz';
@@ -106,5 +85,18 @@ function gzDecompressFile($filename, $gz_file) {
 	// Files are done, close files
 	fclose ( $out_file );
 	gzclose ( $file );
+}
+function unZip($location, $newLocation) {
+	if (exec ( "unzip $location", $arr )) {
+		mkdir ( $newLocation );
+		for($i = 1; $i < count ( $arr ); $i ++) {
+			$file = trim ( preg_replace ( "~inflating: ~", "", $arr [$i] ) );
+			copy ( $file, $newLocation . $file );
+			unlink ( $file );
+		}
+		return TRUE;
+	} else {
+		return FALSE;
+	}
 }
 ?>
