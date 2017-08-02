@@ -3,7 +3,6 @@ ini_set('upload_max_filesize', '50M');
 ini_set('post_max_size', '50M');
 ini_set('max_input_time', 300);
 ini_set('max_execution_time', 300);
-set_time_limit(max_execution_time);
 if (isset ( $_FILES ['follower'] ) && isset ( $_FILES ['similar'] ) && isset ( $_FILES ['c2u'] ) && isset ( $_FILES ['u2c'] )) {
 	$errors = array ();
 	
