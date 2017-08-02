@@ -193,7 +193,7 @@ function startMultiSelect(graph, renderer, layout) {
 				}
 				nodeUI.size = 10;
 			}
-			var button = document.getElementById('sendCluster');
+			var button = document.getElementById('send_cluster_button');
 			if (nodesInside.length == 0) {
 
 				button.style.visibility = 'hidden';
@@ -215,7 +215,7 @@ function startMultiSelect(graph, renderer, layout) {
 function sendNodes() {
 	localStorage.setItem("nodesInside", JSON.stringify(selectedNodes));
 	localStorage.setItem("nodesSimilar", JSON.stringify(similar));
-	window.location.href = "./secondGraph.html";
+	//window.location.href = "./secondGraph.html";
 }
 
 function createOverlay(overlayDom) {
