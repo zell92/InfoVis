@@ -65,6 +65,9 @@ if (isset ( $_FILES ['follower'] ) && isset ( $_FILES ['similar'] ) && isset ( $
 		print_r ( $errors );
 	}
 }
+else{
+	error_reporting(E_ALL);
+}
 function gzCompressFile($source, $level) {
 	$dest = $source . '.gz';
 	$mode = 'wb' . $level;
