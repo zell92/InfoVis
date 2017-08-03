@@ -15,6 +15,8 @@ var selectedNodes = JSON.parse(localStorage.getItem("nodesInside"));
 var mapSimilar = new Map();
 //ARRAY DELLE COPPIE DA INSERIRE NEL SECONDO GRAFO
 var graphArray = [];
+//Nodi nelle cliques
+var nodeCliques = new Set();
 
 // variabile per l'evento click
 var bool = 0;
@@ -32,7 +34,6 @@ var slider = new Slider('#barra', {
 function onLoad() {
 	//GENERO LA MAPPA DEI SIMILI
 	arrayToMap();
-	console.log(mapSimilar.size);
 	//GENERO L'ARRAY DELLE COPPIE DI NODI DA INSERIRE NEL SECONDO GRAFO
 	var k = slider.getValue();
 	getKSimilar(k, graphArray);
@@ -142,6 +143,17 @@ function onLoad() {
 
 	});
 	renderer.rerender();
+    
+    nodeCliques = new Set();
+	console.log("Nodi cliques:");
+	selectedNodes.forEach(function(el){
+	graph.forEachLinkedNode(el, function(linkedNode, link){
+	if(selectedNodes.indexOf(linkedNode.id)>=0){
+			nodeCliques.add(linkedNode.id);
+				}
+		});
+    });
+    console.log(nodeCliques);
 
 	//MODIFICO IL GRAFO SE CAMBIO K	
 	slider.on('slideStop', function() {
@@ -165,8 +177,19 @@ function onLoad() {
 				}
 
 			});
+            		nodeCliques = new Set();
+					console.log("Nodi cliques:");
+					selectedNodes.forEach(function(el){
+						graph.forEachLinkedNode(el, function(linkedNode, link){
+							if(selectedNodes.indexOf(linkedNode.id)>=0){
+								nodeCliques.add(linkedNode.id);
+								}
+							});
+                   		});
 			renderer.rerender();
-		}
+            console.log(nodeCliques);
+
+        }
 
 	});
 }
@@ -196,8 +219,6 @@ function getKSimilar(k, graphArray) {
 
 			//ITERO SUI SIMILI
 			for (var i = 0; i < iter; i++) {
-				console.log(key);
-				console.log(item);
 				var array = mapObj.get(item[i]);
 				if (array.indexOf(key) >= 0 && array.indexOf(key) < k) {
 					//salvo la coppia di nodi
@@ -212,5 +233,8 @@ function getKSimilar(k, graphArray) {
 
 // FUNZIONE PER VISUALIZZARE LE CLIQUES DEI NODI SELEZIONATI PER LA SIMILARIT�
 function sendSelectedNodes() {
+	var arrayNodeCliques=Array.from(nodeCliques);
+    console.log(arrayNodeCliques);
+	localStorage.setItem("nodeCliques",JSON.stringify(arrayNodeCliques));
 	window.location.href = "./thirdGraph.html";
 }

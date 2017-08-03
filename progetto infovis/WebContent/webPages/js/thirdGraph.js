@@ -8,6 +8,8 @@
  * 
  */
 var selectedNodes = [];
+//nodi selezionati e simili
+var nodeCliques = JSON.parse(localStorage.getItem("nodeCliques"));
 
 //ARRAY DEI NODI SELEZIONATI PER LA SIMILARITÀ
 var selectedNodesSimilar = JSON.parse(localStorage.getItem("nodesInside"));
@@ -23,6 +25,8 @@ var offsetSide = marginLeft;
 // variabile per l'evento click
 var bool = 0;
 var oldNode = -1;
+var blueColor = "#009ee8ff";
+var orangeColor = "#FFA500ff";
 
 function onLoad() {
 	var graph = Viva.Graph.graph();
@@ -45,15 +49,19 @@ function onLoad() {
 	// event interaction : add children node.
 	var events = Viva.Graph.webglInputEvents(graphics, graph);
 	// change color
+	// change size
 	events.click(function(node) {
-		
 		var userid = document.getElementById('userID');
 		if (bool == 0) {
 			// node
 			var nodeUI = graphics.getNodeUI(node.id);
-			nodeUI.color = 0xFFA500ff;
+			nodeUI.size = 20;
 			userid.innerHTML = "User ID: " + node.id;
-			userid.style.color = "#FFA500ff";
+			if (nodeUI.color == 0xFFA500ff) {
+				userid.style.color = orangeColor;
+			} else {
+				userid.style.color = blueColor;
+			}
 			userid.style.visibility = 'visible';
 			bool = 1;
 			oldNode = node.id;
@@ -61,18 +69,20 @@ function onLoad() {
 			// link
 			graph.forEachLinkedNode(node.id, function(node, link) {
 				var linkUI = graphics.getLinkUI(link.id);
-				linkUI.color = 4286513407;
+				linkUI.color = nodeUI.color;
 			});
 		} else if (node.id !== oldNode) {
 			// node
 			var oldNodeUI = graphics.getNodeUI(oldNode);
 			var nodeUI = graphics.getNodeUI(node.id);
-			if (selectedNodes.indexOf(oldNode) == -1) {
-				oldNodeUI.color = 0x009ee8ff;
-			}
-			nodeUI.color = 0xFFA500ff;
+			oldNodeUI.size = 10;
+			nodeUI.size = 20;
 			userid.innerHTML = "User ID: " + node.id;
-			userid.style.color = "#FFA500ff";
+			if (nodeUI.color == 0xFFA500ff) {
+				userid.style.color = orangeColor;
+			} else {
+				userid.style.color = blueColor;
+			}
 			userid.style.visibility = 'visible';
 
 			// link
@@ -82,16 +92,14 @@ function onLoad() {
 			});
 			graph.forEachLinkedNode(node.id, function(node, link) {
 				var linkUI = graphics.getLinkUI(link.id);
-				linkUI.color = 4286513407;
+				linkUI.color = nodeUI.color;
 			});
 
 			oldNode = node.id;
 		} else {
 			// node
 			var nodeUI = graphics.getNodeUI(node.id);
-			if (selectedNodes.indexOf(oldNode) == -1) {
-				nodeUI.color = 0x009ee8ff;
-			}
+			nodeUI.size = 10;
 			userid.style.visibility = 'hidden';
 			bool = 0;
 			oldNode = -1;
@@ -110,8 +118,19 @@ function onLoad() {
 		container : document.getElementById('graph-container')
 	});
 	var multiSelectOverlay;
-
 	renderer.run();
+
+console.log(nodeCliques);
+    graph.forEachNode(function(node) {
+		if (nodeCliques.indexOf(node.id) >= 0) {
+        console.log(node.id);
+			var nodeUI = graphics.getNodeUI(node.id);
+			nodeUI.color = 0xFFA500ff;
+		}
+
+	});
+	renderer.rerender();
+
 
 	document.addEventListener('keydown', function(e) {
 		if (e.which === 16 && !multiSelectOverlay) { // shift key
@@ -169,10 +188,12 @@ function startMultiSelect(graph, renderer, layout) {
 				nodeUI.size = 20;
 				nodesInside.push(node.id)
 			} else {
-				if (node.id != oldNode) {
+				if (nodeCliques.indexOf(node.id)==-1) {
 					nodeUI.color = 0x009ee8ff;
+
 				}
-				nodeUI.size = 10;
+                if(node.id!=oldNode)
+                	nodeUI.size = 10;
 			}
 			var button = document.getElementById('sendCluster');
 			if (nodesInside.length == 0) {
