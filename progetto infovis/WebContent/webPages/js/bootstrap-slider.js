@@ -467,7 +467,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				if (Array.isArray(rangeHighlightsOpts) && rangeHighlightsOpts.length > 0) {
 					for (var j = 0; j < rangeHighlightsOpts.length; j++) {
 						var rangeHighlightElement = document.createElement("div");
-						var customClassString = rangeHighlightsOpts[j].class || "";
+						var customClassString = rangeHighlightsOpts[j] || "";
 						rangeHighlightElement.className = "slider-rangeHighlight slider-selection " + customClassString;
 						this.rangeHighlightElements.push(rangeHighlightElement);
 						sliderTrack.appendChild(rangeHighlightElement);
